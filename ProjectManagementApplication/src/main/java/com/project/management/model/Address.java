@@ -1,14 +1,22 @@
 package com.project.management.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 public class Address {
+	@JsonProperty("Street")
 	private String Street;
+	@JsonProperty("city")
 	private String city;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonProperty("country")
 	private String country;
+	@JsonProperty("pincode")
 	private String pincode;
 	public String getStreet() {
 		return Street;

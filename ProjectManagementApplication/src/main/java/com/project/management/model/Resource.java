@@ -2,6 +2,7 @@ package com.project.management.model;
 
 import java.util.HashMap;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Resource {
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("designation")

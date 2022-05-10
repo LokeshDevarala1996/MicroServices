@@ -1,56 +1,30 @@
 package com.project.management.model;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Project {
-	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonProperty("projectName")
 	private String projectName;
+	@JsonProperty("projectOwner")
 	private String projectOwner;
+	@JsonProperty("resources")
 	private List<Resource> resources;
+	@JsonProperty("tasks")
 	private List<Task> tasks;
+	@JsonProperty("projectDescription")
     private String projectDescription;
-	public String getProjectName() {
-		return projectName;
-	}
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-	public String getProjectOwner() {
-		return projectOwner;
-	}
-	public void setProjectOwner(String projectOwner) {
-		this.projectOwner = projectOwner;
-	}
-	public List<Resource> getResources() {
-		return resources;
-	}
-	public void setResources(List<Resource> resources) {
-		this.resources = resources;
-	}
-	public List<Task> getTasks() {
-		return tasks;
-	}
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
-	public String getProjectDescription() {
-		return projectDescription;
-	}
-	public void setProjectDescription(String projectDescription) {
-		this.projectDescription = projectDescription;
-	}
-	public Project(String projectName, String projectOwner, List<Resource> resources, List<Task> tasks,
-			String projectDescription) {
-		super();
-		this.projectName = projectName;
-		this.projectOwner = projectOwner;
-		this.resources = resources;
-		this.tasks = tasks;
-		this.projectDescription = projectDescription;
-	}
-    
-    public Project() {
-    	
-    }
-    
+	@JsonProperty("resourceToTaskMapping")
+	private HashMap<String,String> resourceToTaskMapping;
 }

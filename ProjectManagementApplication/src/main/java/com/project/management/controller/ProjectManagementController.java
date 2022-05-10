@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.management.model.Project;
 import com.project.management.model.Task;
 import com.project.management.service.ManagementService;
 
@@ -40,6 +41,20 @@ public class ProjectManagementController {
 	public List<Task> getTask(@PathVariable(value = "taskName") String taskName){
 		
 		return projectManagementService.getTask(taskName);
+		
+	}
+	
+	@PostMapping(value = "/project", consumes = MediaType.APPLICATION_JSON)
+	public String createProject(@RequestBody Project projectDetails){
+		
+		return projectManagementService.createProject(projectDetails);
+		
+	}
+	
+	@GetMapping(value = "/project/{projectName}", produces=MediaType.APPLICATION_JSON)
+	public Project getProject(@PathVariable(value = "projectName") String projectName){
+		
+		return projectManagementService.getProject(projectName);
 		
 	}
 	
