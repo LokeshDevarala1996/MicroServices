@@ -1,59 +1,26 @@
 package com.project.management.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Task {
+	@JsonProperty("name")
 	private String name;
+	@JsonProperty("description")
 	private String description;
+	@JsonProperty("status")
 	private String status;
+	@JsonProperty("type")
+	private String type;
+	@JsonProperty("priority")
+	private String priority;
+	@JsonProperty("expectedDaystoComplete")
 	private int expectedDaystoComplete;
-
-	public Task(String name, String description, String status, int expectedDaystoComplete) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.status = status;
-		this.expectedDaystoComplete = expectedDaystoComplete;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getExpectedDaystoComplete() {
-		return expectedDaystoComplete;
-	}
-
-	public void setExpectedDaystoComplete(int expectedDaystoComplete) {
-		this.expectedDaystoComplete = expectedDaystoComplete;
-	}
-
-	@Override
-	public String toString() {
-		return "Task [name=" + name + ", description=" + description + ", expectedDaystoComplete="
-				+ expectedDaystoComplete + "]";
-	}
-
-	public Task() {
-
-	}
+	
 
 }
