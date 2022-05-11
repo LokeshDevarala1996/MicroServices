@@ -23,6 +23,10 @@ public class Task {
 	private String priority;
 	@JsonProperty("expectedDaystoComplete")
 	private int expectedDaystoComplete;
+	@JsonProperty("resourceName")
+	private String resourceName;
+	@JsonProperty("projectName")
+	private String projectName;
 	
-
+	
 }

@@ -8,8 +8,10 @@ import com.project.management.model.Task;
 public interface ManagementService {
 	public List<Task> getAllTaskDetails();
 	public String createTask(Task taskDetails);
-	public List<Task> getTask(String taskName);
+	public List<Task> getTask(String taskName,String projectName);
 	public Project getProject(String projectName);
 	public String createProject(Project project);
+	public boolean isProjectCompleteByDate(String projectNAme,String date);
+	public String projectExpectedDateofCompletion(String projectNAme);
 
 }

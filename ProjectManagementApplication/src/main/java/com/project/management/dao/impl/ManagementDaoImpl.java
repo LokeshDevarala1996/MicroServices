@@ -1,6 +1,7 @@
 package com.project.management.dao.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,8 @@ public class ManagementDaoImpl implements ManagementDao {
 	public List<Project> projects=new ArrayList<>();
 	public List<Resource> resources =  new ArrayList<>();
 	public List<Address> addresses = new ArrayList<>();
+	public HashMap<String,List<Task>> projectToTaskMap = new HashMap<>();
+	public HashMap<String,List<Resource>> projectToResourceMap = new HashMap<>();
 
 	@Override
 	public List<Task> getTasksDetails() {
@@ -36,13 +39,14 @@ public class ManagementDaoImpl implements ManagementDao {
 			return "Already Existing";
 		}
 		tasks.add(task);
+		projectToTaskMap.put(task.getProjectName(), tasks);
 		return "Success";
 	}
 
 	@Override
-	public List<Task> getTask(String taskName) {
+	public List<Task> getTask(String taskName, String projectName) {
 		// TODO Auto-generated method stub
-		List<Task> task= tasks.stream().filter(e->e.getName().equalsIgnoreCase(taskName)).collect(Collectors.toList());
+		List<Task> task= projectToTaskMap.get(projectName).stream().filter(e->e.getName().equalsIgnoreCase(taskName)).collect(Collectors.toList());
 		return task;
 	}
 
@@ -54,6 +58,8 @@ public class ManagementDaoImpl implements ManagementDao {
 			return "Already Existing";
 		}
 		projects.add(project);
+		projectToTaskMap.put(project.getProjectName(), project.getTasks());
+		projectToResourceMap.put(project.getProjectName(),project.getResources());
 		return "Successfully inserted";
 		//return null;
 	}

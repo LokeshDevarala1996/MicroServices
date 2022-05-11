@@ -37,10 +37,10 @@ public class ProjectManagementController {
 		
 	}
 	
-	@GetMapping(value = "/task/{taskName}", produces=MediaType.APPLICATION_JSON)
-	public List<Task> getTask(@PathVariable(value = "taskName") String taskName){
+	@GetMapping(value = "/task/{projectName}/{taskName}", produces=MediaType.APPLICATION_JSON)
+	public List<Task> getTask(@PathVariable(value = "taskName") String taskName, @PathVariable(value="projectName") String projectName){
 		
-		return projectManagementService.getTask(taskName);
+		return projectManagementService.getTask(taskName,projectName);
 		
 	}
 	
@@ -51,12 +51,32 @@ public class ProjectManagementController {
 		
 	}
 	
-	@GetMapping(value = "/project/{projectName}", produces=MediaType.APPLICATION_JSON)
+	@GetMapping(value = "/project", produces=MediaType.APPLICATION_JSON)
 	public Project getProject(@PathVariable(value = "projectName") String projectName){
 		
 		return projectManagementService.getProject(projectName);
 		
 	}
+	
+	@PostMapping(value = "/projectEta", produces=MediaType.APPLICATION_JSON)
+	public String getProjectEta(@RequestBody String projectName){
+		
+		return projectManagementService.projectExpectedDateofCompletion(projectName);
+		
+	}
+	
+	@GetMapping(value = "/projectCompleteByDate/{projectName}/{expectedDate}", produces=MediaType.APPLICATION_JSON)
+	public String projectCompleteByDate(@PathVariable(value = "projectName") String projectName,@PathVariable(value = "expectedDate") String expectedDate){
+		
+		if(projectManagementService.isProjectCompleteByDate(projectName, expectedDate)) {
+			return "yes we able to complete by given date";
+		}else {
+			return "No, still we need some more days to complete";
+		}
+		
+	}
+	
+
 	
 	
 }

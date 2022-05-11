@@ -27,4 +27,6 @@ public class Project {
     private String projectDescription;
 	@JsonProperty("resourceToTaskMapping")
 	private HashMap<String,String> resourceToTaskMapping;
+	@JsonProperty("startDate")
+	private String startDate;
 }

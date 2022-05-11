@@ -1,6 +1,7 @@
 package com.project.management.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,6 +24,7 @@ public class Resource {
 	@JsonProperty("address")
 	private Address address;
 	@JsonProperty("taskDetails")
-	private HashMap<String, Integer> taskDetails;
-
+	private List<Task> taskDetails;
+	
+	
 }

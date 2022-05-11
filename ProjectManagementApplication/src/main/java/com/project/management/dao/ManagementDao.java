@@ -9,7 +9,7 @@ public interface ManagementDao {
 	
 	public List<Task> getTasksDetails();
 	public String createTask(Task task);
-	public List<Task> getTask(String taskName);
+	public List<Task> getTask(String taskName,String projectName);
 	public String createProject(Project project);
 	public Project getProject(String projectName);
 

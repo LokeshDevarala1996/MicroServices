@@ -1,5 +1,9 @@
 package com.project.management.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +35,9 @@ public class ManagementServiceImpl implements ManagementService{
 	}
 
 	@Override
-	public List<Task> getTask(String taskName) {
+	public List<Task> getTask(String taskName,String projectName) {
 		// TODO Auto-generated method stub
-		 return managementDao.getTask(taskName);
+		 return managementDao.getTask(taskName,projectName);
 	}
 
 	@Override
@@ -46,6 +50,42 @@ public class ManagementServiceImpl implements ManagementService{
 	public Project getProject(String projectName) {
 		// TODO Auto-generated method stub
 		return managementDao.getProject(projectName);
+	}
+
+	@Override
+	public boolean isProjectCompleteByDate(String projectName,String date) {
+		Project project = managementDao.getProject(projectName);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		boolean result = false;
+		try {
+			Date endDate= sdf.parse(date);
+			Date startDate=sdf.parse(project.getStartDate());
+			c.setTime(startDate);
+			int days= project.getTasks().stream().mapToInt(e->e.getExpectedDaystoComplete()).sum();
+			c.add(Calendar.DAY_OF_MONTH, days);  
+			Date newDateNow = c.getTime();
+			 result=newDateNow.before(endDate);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// TODO Auto-generated method stub
+		return result;
+	}
+
+	@Override
+	public String projectExpectedDateofCompletion(String projectName) {
+		// TODO Auto-generated method stub
+		Project project = managementDao.getProject(projectName);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar c = Calendar.getInstance();
+		int days= project.getTasks().stream().mapToInt(e->e.getExpectedDaystoComplete()).sum();
+		c.add(Calendar.DAY_OF_MONTH, days);  
+		Date newDateNow = c.getTime();
+		return sdf.format(newDateNow);
 	}
 
 }
